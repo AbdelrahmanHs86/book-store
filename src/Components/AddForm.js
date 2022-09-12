@@ -17,6 +17,10 @@ const Addform = () => {
     const desc = descRef.current.value;
     const bookData = { title, price, desc };
     dispatch(addBooks(bookData));
+
+    titleRef.current.value = null;
+    priceRef.current.value = null;
+    descRef.current.value = null;
   };
 
   return (

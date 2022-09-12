@@ -21,7 +21,7 @@ const BookContainer = () => {
       <hr className='my-5' />
       <div className='row'>
         <div className='col'>
-          <BooksList bookslist={books.bookslist} />
+          <BooksList bookslist={books.bookslist} loading={books.loading} />
         </div>
         <div className='col side-line'>
           <BookInfo />

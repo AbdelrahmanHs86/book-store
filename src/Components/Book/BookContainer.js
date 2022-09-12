@@ -10,6 +10,7 @@ import './book.css';
 const BookContainer = () => {
 
   const books = useSelector(state => state.bookReducer);
+  const auth = useSelector((state) => state.authReducer)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const BookContainer = () => {
       <hr className='my-5' />
       <div className='row'>
         <div className='col'>
-          <BooksList bookslist={books.bookslist} loading={books.loading} />
+          <BooksList bookslist={books.bookslist} loading={books.loading} loggedIn={auth.loggedIn} />
         </div>
         <div className='col side-line'>
           <BookInfo />

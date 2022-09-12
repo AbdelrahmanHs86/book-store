@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
 import { addBooks } from "../store/reducers/bookSlice";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const Addform = () => {
+  const auth = useSelector((state) => state.authReducer)
   const dispatch = useDispatch();
 
   const titleRef = useRef();
@@ -59,6 +60,7 @@ const Addform = () => {
             type="submit"
             onClick={(e) => handleSubmit(e)}
             className="btn btn-primary"
+            disabled={!auth.loggedIn}
           >
             Submit
           </button>

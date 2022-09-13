@@ -1,7 +1,17 @@
-import React from 'react';
-import { selectBook } from '../../store/reducers/bookSlice';
+import React, { useEffect } from 'react';
+import { selectBook, getBooks, deleteBook } from '../../store/reducers/bookSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
-const BooksList = ({ bookslist, loading, loggedIn, dispatch, deleteBook }) => {
+
+const BooksList = ({ bookslist, loading }) => {
+
+  const auth = useSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getBooks());
+  }, [dispatch])
+
 
   return (
     <div>
@@ -16,10 +26,10 @@ const BooksList = ({ bookslist, loading, loggedIn, dispatch, deleteBook }) => {
                   <li key={book.id} className='list-group-item d-flex  justify-content-between align-items-center' >
                     <div>{book.title}</div>
                     <div className='btn-group' role='group'>
-                      <button type='button' className='btn btn-primary' onClick={() => dispatch(selectBook(book))} disabled={!loggedIn}>
+                      <button type='button' className='btn btn-primary' onClick={() => dispatch(selectBook(book))} disabled={!auth.loggedIn}>
                         Read
                       </button>
-                      <button type='button' className='btn btn-danger' onClick={() => dispatch(deleteBook(book))} disabled={!loggedIn}>
+                      <button type='button' className='btn btn-danger' onClick={() => dispatch(deleteBook(book))} disabled={!auth.loggedIn}>
                         Delete
                       </button>
                     </div>

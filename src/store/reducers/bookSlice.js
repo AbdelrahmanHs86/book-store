@@ -17,7 +17,7 @@ export const getBooks = createAsyncThunk('book/getBooks', async (arg, thunkAPI) 
 
 export const addBooks = createAsyncThunk('book/addBooks', async (bookData, thunkAPI) => {
 
-    const { rejectWithValue, getState, dispatch } = thunkAPI;
+    const { rejectWithValue, getState } = thunkAPI;
     const userName = getState().authReducer.userName;
 
     try {
@@ -28,6 +28,22 @@ export const addBooks = createAsyncThunk('book/addBooks', async (bookData, thunk
         });
         const data = await res.json();
         return data;
+    } catch (e) {
+        rejectWithValue(e.message)
+    }
+
+})
+
+export const deleteBook = createAsyncThunk('book/deleteBook', async (book, thunkAPI) => {
+
+    const { rejectWithValue, dispatch } = thunkAPI;
+
+    try {
+        await fetch(`http://localhost:3005/book/${book.id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+        });
+        return book;
     } catch (e) {
         rejectWithValue(e.message)
     }
@@ -60,6 +76,17 @@ const bookSlice = createSlice({
             state.bookslist.push(action.payload);
         },
         [addBooks.rejected]: (state, action) => {
+            console.log('rejected', action.payload);
+        },
+
+        //DeleteBook
+        [deleteBook.pending]: (state, action) => {
+
+        },
+        [deleteBook.fulfilled]: (state, action) => {
+            state.bookslist = state.bookslist.filter(book => book.id !== action.payload.id);
+        },
+        [deleteBook.rejected]: (state, action) => {
             console.log('rejected', action.payload);
         },
 

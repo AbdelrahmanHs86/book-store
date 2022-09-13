@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { getBooks } from '../../store/reducers/bookSlice';
+import { getBooks, deleteBook } from '../../store/reducers/bookSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import BookInfo from './BookInfo';
 import BooksList from './BooksList';
@@ -22,7 +22,7 @@ const BookContainer = () => {
       <hr className='my-5' />
       <div className='row'>
         <div className='col'>
-          <BooksList bookslist={books.bookslist} loading={books.loading} loggedIn={auth.loggedIn} />
+          <BooksList bookslist={books.bookslist} loading={books.loading} loggedIn={auth.loggedIn} dispatch={dispatch} deleteBook={deleteBook} />
         </div>
         <div className='col side-line'>
           <BookInfo />

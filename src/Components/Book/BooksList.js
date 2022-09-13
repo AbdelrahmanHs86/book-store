@@ -1,6 +1,10 @@
 import React from 'react';
 
-const BooksList = ({ bookslist, loading, loggedIn }) => {
+const BooksList = ({ bookslist, loading, loggedIn, dispatch, deleteBook }) => {
+
+  const handleDeletion = (book) => {
+    dispatch(deleteBook(book));
+  }
 
   return (
     <div>
@@ -18,7 +22,7 @@ const BooksList = ({ bookslist, loading, loggedIn }) => {
                       <button type='button' className='btn btn-primary' disabled={!loggedIn}>
                         Read
                       </button>
-                      <button type='button' className='btn btn-danger' disabled={!loggedIn}>
+                      <button type='button' className='btn btn-danger' onClick={() => handleDeletion(book)} disabled={!loggedIn}>
                         Delete
                       </button>
                     </div>

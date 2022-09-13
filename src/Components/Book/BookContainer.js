@@ -10,7 +10,7 @@ import './book.css';
 const BookContainer = () => {
 
   const books = useSelector(state => state.bookReducer);
-  const auth = useSelector((state) => state.authReducer)
+  const auth = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const BookContainer = () => {
           <BooksList bookslist={books.bookslist} loading={books.loading} loggedIn={auth.loggedIn} dispatch={dispatch} deleteBook={deleteBook} />
         </div>
         <div className='col side-line'>
-          <BookInfo />
+          <BookInfo selectedBook={books.selectedBook} />
         </div>
       </div>
     </Fragment>

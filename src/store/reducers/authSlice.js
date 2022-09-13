@@ -1,8 +1,8 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState: { loggedIn: false },
+    initialState: { loggedIn: false, userName: 'Hamedoo' },
     reducers: {
         toggleLogin(state, action) {
             state.loggedIn = !state.loggedIn;

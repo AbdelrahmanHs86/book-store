@@ -3,7 +3,7 @@ import { selectBook, getBooks, deleteBook } from '../../store/reducers/bookSlice
 import { useSelector, useDispatch } from 'react-redux';
 
 
-const BooksList = ({ bookslist, loading }) => {
+const BooksList = ({ bookslist, loading, error }) => {
 
   const auth = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
@@ -38,7 +38,15 @@ const BooksList = ({ bookslist, loading }) => {
 
                 :
                 <div>No books</div>
+
             }
+            {
+              error &&
+              <span className='w-25 h-25 d-inline-block alert alert-danger  mb-0' role='alert'>
+                {error}
+              </span>
+            }
+
           </ul>
       }
 

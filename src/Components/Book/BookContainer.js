@@ -16,7 +16,7 @@ const BookContainer = () => {
       <hr className='my-5' />
       <div className='row'>
         <div className='col'>
-          <BooksList bookslist={books.bookslist} loading={books.loading} />
+          <BooksList bookslist={books.bookslist} loading={books.loading} error={books.error} />
         </div>
         <div className='col side-line'>
           <BookInfo selectedBook={books.selectedBook} />

@@ -1,14 +1,18 @@
 {
   "book": [
     {
-      "id": 1,
-      "title": "react book",
-      "desc": "learn react"
+      "title": "Redux Toolkit",
+      "price": "50",
+      "desc": "very priceless book",
+      "author": "Hamedoo",
+      "id": 3
     },
     {
-      "id": 2,
-      "title": "JS book",
-      "desc": "learn javascript"
+      "title": "Redux ",
+      "price": "35",
+      "desc": "Very Good Book",
+      "author": "Hamedoo",
+      "id": 4
     }
   ]
 }

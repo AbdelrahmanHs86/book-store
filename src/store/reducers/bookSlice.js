@@ -45,14 +45,14 @@ export const deleteBook = createAsyncThunk('book/deleteBook', async (book, thunk
         });
         return book;
     } catch (e) {
-        rejectWithValue(e.message)
+        return rejectWithValue(e.message)
     }
 
 })
 
 const bookSlice = createSlice({
     name: 'book',
-    initialState: { bookslist: [], loading: true, selectedBook: {} },
+    initialState: { bookslist: [], loading: true, selectedBook: {}, error: '' },
     reducers: {
         selectBook(state, action) {
             state.selectedBook = action.payload;
@@ -62,6 +62,7 @@ const bookSlice = createSlice({
         //getbooks
         [getBooks.pending]: (state, action) => {
             state.loading = true;
+            state.error = null;
         },
         [getBooks.fulfilled]: (state, action) => {
             state.loading = false;
@@ -69,7 +70,8 @@ const bookSlice = createSlice({
         },
         [getBooks.rejected]: (state, action) => {
             state.loading = false;
-            console.log('rejected', action.payload);
+            state.error = action.payload;
+            console.log(action.payload)
         },
 
         //AddBooks

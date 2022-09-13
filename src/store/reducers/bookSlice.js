@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getBooks = createAsyncThunk('book/getBooks', async (arg, thunkAPI) => {
 
-    const { rejectWithValue, getState, dispatch } = thunkAPI;
+    const { rejectWithValue } = thunkAPI;
 
     try {
         const res = await fetch(' http://localhost:3005/book');
@@ -18,12 +18,13 @@ export const getBooks = createAsyncThunk('book/getBooks', async (arg, thunkAPI) 
 export const addBooks = createAsyncThunk('book/addBooks', async (bookData, thunkAPI) => {
 
     const { rejectWithValue, getState, dispatch } = thunkAPI;
+    const userName = getState().authReducer.userName;
 
     try {
         const res = await fetch(' http://localhost:3005/book', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json; charset=UTF-8' },
-            body: JSON.stringify(bookData)
+            body: JSON.stringify({ ...bookData, author: userName })
         });
         const data = await res.json();
         return data;

@@ -10,7 +10,7 @@ export const getBooks = createAsyncThunk('book/getBooks', async (arg, thunkAPI) 
         const data = await res.json();
         return data;
     } catch (e) {
-        rejectWithValue(e.message)
+        return rejectWithValue(e.message)
     }
 
 })
@@ -29,14 +29,14 @@ export const addBooks = createAsyncThunk('book/addBooks', async (bookData, thunk
         const data = await res.json();
         return data;
     } catch (e) {
-        rejectWithValue(e.message)
+        return rejectWithValue(e.message)
     }
 
 })
 
 export const deleteBook = createAsyncThunk('book/deleteBook', async (book, thunkAPI) => {
 
-    const { rejectWithValue, dispatch } = thunkAPI;
+    const { rejectWithValue } = thunkAPI;
 
     try {
         await fetch(`http://localhost:3005/book/${book.id}`, {

@@ -52,8 +52,12 @@ export const deleteBook = createAsyncThunk('book/deleteBook', async (book, thunk
 
 const bookSlice = createSlice({
     name: 'book',
-    initialState: { bookslist: [], loading: true, },
-    reducers: {},
+    initialState: { bookslist: [], loading: true, selectedBook: {} },
+    reducers: {
+        selectBook(state, action) {
+            state.selectedBook = action.payload;
+        }
+    },
     extraReducers: {
         //getbooks
         [getBooks.pending]: (state, action) => {
@@ -85,6 +89,9 @@ const bookSlice = createSlice({
         },
         [deleteBook.fulfilled]: (state, action) => {
             state.bookslist = state.bookslist.filter(book => book.id !== action.payload.id);
+            if (state.selectedBook.id === action.payload.id) {
+                state.selectedBook = {};
+            }
         },
         [deleteBook.rejected]: (state, action) => {
             console.log('rejected', action.payload);
@@ -94,5 +101,5 @@ const bookSlice = createSlice({
 
 })
 
-
+export const { selectBook } = bookSlice.actions;
 export default bookSlice.reducer;
